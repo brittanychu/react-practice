@@ -1,35 +1,36 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 
 export default class BonesJokes extends Component {
   componentDidMount() {
-    this.nextJoke()
+    this.nextJoke();
   }
 
   nextJoke = () =>
     this.setState({
       joke: randomJoke(),
-      answered: false,
-    })
+      answered: false
+    });
 
-  answer = () =>
-    this.setState({answered: true})
+  answer = () => this.setState({ answered: true });
 
   render() {
-    if (!this.state) { return null }
+    if (!this.state) {
+      return null;
+    }
 
-    const {joke, answered} = this.state
+    const { joke, answered } = this.state;
     return (
       <div onClick={answered ? this.nextJoke : this.answer}>
         <h1>{joke.q}</h1>
         {answered && <h2>{joke.a}</h2>}
         <cite>~xoxo, bones</cite>
       </div>
-    )
+    );
   }
 }
 
 function randomJoke() {
-  return jokes[Math.floor(Math.random() * jokes.length)]
+  return jokes[Math.floor(Math.random() * jokes.length)];
 }
 
 const jokes = `Q: Who won the skeleton beauty contest? 
@@ -92,7 +93,7 @@ Q: What happened to the boat that sank in the sea full of piranha fish ?
 A: It came back with a skeleton crew !
 Q: What do you call a skeleton snake ? 
 A: A rattler !
-Q: What is a skeletons like to drink milk ? 
+Q: What is a skeletons favorite drink ? 
 A: Milk - it's so good for the bones !
 Q: Why did the skeleton stay out in the snow all night ? 
 A: He was a numbskull !
@@ -146,9 +147,14 @@ Q: How did skeletons send their letters in the old days?
 A: By bony express!
 Q: How do you make a skeleton laugh? 
 A: Tickle his funny bone!`
-  .split('\n')
-  .reduce((all, row, i) =>
-    i % 2 === 0
-    ? [...all, {q: row}]
-    : [...all.slice(0, all.length - 1), Object.assign({a: row}, all[all.length - 1])],
-    [])
+  .split("\n")
+  .reduce(
+    (all, row, i) =>
+      i % 2 === 0
+        ? [...all, { q: row }]
+        : [
+            ...all.slice(0, all.length - 1),
+            Object.assign({ a: row }, all[all.length - 1])
+          ],
+    []
+  );
